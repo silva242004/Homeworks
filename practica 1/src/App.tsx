@@ -1,0 +1,77 @@
+import { useState } from "react"
+import VehiculosDisponibles from "./VehiculosDisponibles"
+import HistorialAlquiler from "./HistorialAlquiler"
+import VehiculoDestacado from "./VehiculoDestacado"
+import Inversionistas from "./Inversionistas"
+import { ListaEnlazada } from "./listas/ListaEnlazada"
+import { ListaDoble } from "./listas/ListaDoble"
+import { ListaCircular } from "./listas/ListaCircular"
+import { ListaCircularDoble } from "./listas/ListaCircularDoble"
+
+// crear listas
+const disponibles = new ListaEnlazada()
+const historial = new ListaDoble()
+const destacados = new ListaCircular()
+const inversionistas = new ListaCircularDoble()
+
+// datos de prueba
+disponibles.append("Tesla Model 3")
+disponibles.append("tesla Model Y")
+disponibles.append("tesla Model X")
+disponibles.append("cybertruck")
+disponibles.append("Xiaomi SU7 Ultra")  
+disponibles.append("Xiaomi YU7 Pro")
+disponibles.append("Xiaomi17Pro")
+disponibles.append("BYD Seal")
+disponibles.append("BYD Dolphin")
+
+destacados.append("Xiaomi")
+destacados.append("BYD")
+destacados.append("Tesla")
+
+inversionistas.append("krisR")
+inversionistas.append("AlexP")
+inversionistas.append("ecopetrol")
+inversionistas.append("nutresa")
+inversionistas.append("nestle")
+inversionistas.append("monsanto")
+inversionistas.append("shell")
+inversionistas.append("vidrios y aluminios del norte")
+
+export default function App() {
+
+  const [historialLista, setHistorialLista] = useState<string[]>([])
+
+  function alquilarVehiculo(nombre: string) {
+
+    // eliminar de disponibles
+    disponibles.remove(nombre)
+
+    // agregar al historial
+    historial.append(nombre)
+
+    // actualizar estado de react
+    setHistorialLista(historial.print())
+
+  }
+
+  return (
+    <div>
+
+      <h1>Sistema de alquiler de vehículos</h1>
+
+      <VehiculoDestacado listaDestacados={destacados} />
+
+      <VehiculosDisponibles
+        listaDisponibles={disponibles}
+        alquilarVehiculo={alquilarVehiculo}
+      />
+
+      <HistorialAlquiler registros={historialLista} />
+
+      <Inversionistas listaInversionistas={inversionistas} />
+
+    </div>
+  )
+
+}
