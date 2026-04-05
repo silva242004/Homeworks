@@ -32,18 +32,18 @@ const TaskContext = createContext<TaskContextType | null>(null)
 // ─── Provider ─────────────────────────────────────────
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const { user } = useAuthContext()
-  const { data, loading, error, getAll, add, update, remove } =
+  const { data, loading, error, getAll, add, update, remove, clear} =
     useCollection("tasks")
 
   // Carga las tareas del usuario actual al montar
-  useEffect(() => {
-    if (user) {
-      getAll(
-        [["userId", "==", user.uid]],   // solo las del usuario
-        ["createdAt", "desc"]            // más recientes primero
-      )
-    }
-  }, [user])
+ useEffect(() => {
+  if (user) {
+    clear()                                      // ← limpia antes de cargar
+    getAll([["userId", "==", user.uid]])
+  } else {
+    clear()                                      // ← limpia al cerrar sesión
+  }
+}, [user])
 
   // ── Agregar tarea ─────────────────────────────────
   const addTask = async (title: string): Promise<void> => {

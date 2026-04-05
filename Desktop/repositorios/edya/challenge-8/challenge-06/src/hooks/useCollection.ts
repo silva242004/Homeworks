@@ -31,6 +31,7 @@ interface UseCollectionReturn {
   add:     (newData: DocumentData) => Promise<string | null>
   update:  (id: string, newData: Partial<DocumentData>) => Promise<void>
   remove:  (id: string) => Promise<void>
+  clear:   () => void
 }
 
 // ─── Hook ─────────────────────────────────────────────
@@ -38,6 +39,7 @@ const useCollection = (collectionName: string): UseCollectionReturn => {
   const [data,    setData]    = useState<FirestoreDoc[]>([])
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState<string | null>(null)
+  const clear = () => setData([])
 
   // ── GET ALL ───────────────────────────────────────
   const getAll = async (
@@ -109,7 +111,7 @@ const useCollection = (collectionName: string): UseCollectionReturn => {
     }
   }
 
-  return { data, loading, error, getAll, add, update, remove }
+  return { data, loading, error, getAll, add, update, remove, clear }
 }
 
 export default useCollection
