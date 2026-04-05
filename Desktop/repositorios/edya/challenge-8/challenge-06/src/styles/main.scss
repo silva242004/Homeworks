@@ -1,0 +1,283 @@
+@use 'variables' as v;
+@use 'mixins'    as m;
+
+// ─── Reset ────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family:      v.$font-family;
+  font-size:        v.$font-size-base;
+  background-color: v.$color-bg;
+  color:            v.$color-text;
+  line-height:      1.6;
+  min-height:       100vh;
+}
+
+// ═══════════════════════════════════════════════════════
+// AUTH — Login y Register
+// ═══════════════════════════════════════════════════════
+.auth-container {
+  @include m.flex-center;
+  min-height: 100vh;
+  padding:    v.$spacing-md;
+}
+
+.auth-card {
+  @include m.card;
+  width:      100%;
+  max-width:  420px;
+  box-shadow: v.$shadow-md;
+}
+
+.auth-title {
+  font-size:     v.$font-size-xl;
+  font-weight:   700;
+  color:         v.$color-text;
+  margin-bottom: v.$spacing-xs;
+}
+
+.auth-subtitle {
+  color:         v.$color-text-muted;
+  margin-bottom: v.$spacing-lg;
+  font-size:     v.$font-size-sm;
+}
+
+.auth-error {
+  background:    rgba(v.$color-danger, 0.1);
+  color:         v.$color-danger;
+  border:        1px solid rgba(v.$color-danger, 0.3);
+  border-radius: v.$border-radius-sm;
+  padding:       v.$spacing-sm v.$spacing-md;
+  font-size:     v.$font-size-sm;
+  margin-bottom: v.$spacing-md;
+}
+
+.auth-form {
+  display:        flex;
+  flex-direction: column;
+  gap:            v.$spacing-md;
+}
+
+.auth-link {
+  text-align:  center;
+  margin-top:  v.$spacing-lg;
+  font-size:   v.$font-size-sm;
+  color:       v.$color-text-muted;
+
+  a {
+    color:           v.$color-primary;
+    font-weight:     500;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+// ─── Form group ───────────────────────────────────────
+.form-group {
+  display:        flex;
+  flex-direction: column;
+  gap:            v.$spacing-xs;
+
+  label {
+    font-size:   v.$font-size-sm;
+    font-weight: 500;
+    color:       v.$color-text;
+  }
+
+  input { @include m.input-base; }
+}
+
+// ─── Botones globales ─────────────────────────────────
+.btn {
+  @include m.button-base;
+
+  &-primary {
+    background: v.$color-primary;
+    color:      white;
+    width:      100%;
+
+    &:hover:not(:disabled) {
+      background:  v.$color-primary-dark;
+      transform:   translateY(-1px);
+      box-shadow:  v.$shadow-sm;
+    }
+  }
+
+  &-logout {
+    background: transparent;
+    color:      v.$color-danger;
+    border:     1.5px solid v.$color-danger;
+    padding:    8px 16px;
+    font-size:  v.$font-size-sm;
+
+    &:hover {
+      background: v.$color-danger;
+      color:      white;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// TASKS — Página principal
+// ═══════════════════════════════════════════════════════
+.tasks-container {
+  max-width: 680px;
+  margin:    0 auto;
+  padding:   v.$spacing-xl v.$spacing-md;
+}
+
+.tasks-header {
+  @include m.flex-between;
+  margin-bottom: v.$spacing-lg;
+
+  .tasks-title {
+    font-size:   v.$font-size-xl;
+    font-weight: 700;
+  }
+
+  .tasks-user {
+    font-size: v.$font-size-sm;
+    color:     v.$color-text-muted;
+    margin-top: v.$spacing-xs;
+  }
+}
+
+// ─── Formulario nueva tarea ───────────────────────────
+.task-form {
+  display: flex;
+  gap:     v.$spacing-sm;
+  margin-bottom: v.$spacing-lg;
+
+  .task-input {
+    @include m.input-base;
+    flex: 1;
+  }
+
+  .btn-primary {
+    width:      auto;
+    white-space: nowrap;
+    padding:    10px v.$spacing-lg;
+  }
+}
+
+// ─── Secciones ────────────────────────────────────────
+.tasks-section {
+  margin-bottom: v.$spacing-lg;
+}
+
+.section-title {
+  font-size:     v.$font-size-sm;
+  font-weight:   600;
+  color:         v.$color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: v.$spacing-sm;
+
+  &--done { color: v.$color-success; }
+}
+
+// ─── Task Card ────────────────────────────────────────
+.task-card {
+  @include m.flex-between;
+  @include m.card;
+  padding:       v.$spacing-md;
+  margin-bottom: v.$spacing-sm;
+  gap:           v.$spacing-md;
+  transition:    v.$transition-base;
+  border-left:   4px solid v.$color-primary;
+
+  &:hover { box-shadow: v.$shadow-md; }
+
+  &--done {
+    border-left-color: v.$color-success;
+    opacity:           0.75;
+  }
+}
+
+.task-checkbox {
+  width:  18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: v.$color-primary;
+  flex-shrink: 0;
+}
+
+.task-title {
+  flex:      1;
+  font-size: v.$font-size-base;
+  @include   m.truncate;
+
+  &--done {
+    text-decoration: line-through;
+    color:           v.$color-text-muted;
+  }
+}
+
+.task-edit-input {
+  @include m.input-base;
+  flex:    1;
+  padding: v.$spacing-xs v.$spacing-sm;
+}
+
+.task-actions {
+  display: flex;
+  gap:     v.$spacing-xs;
+}
+
+// ─── Botones icono ────────────────────────────────────
+.btn-icon {
+  @include m.button-base;
+  width:         32px;
+  height:        32px;
+  padding:       0;
+  border-radius: v.$border-radius-sm;
+  font-size:     1rem;
+
+  &--edit {
+    background: rgba(v.$color-primary, 0.1);
+    color:      v.$color-primary;
+    &:hover:not(:disabled) { background: rgba(v.$color-primary, 0.2); }
+    &:disabled { opacity: 0.3; cursor: not-allowed; }
+  }
+
+  &--delete {
+    background: rgba(v.$color-danger, 0.1);
+    color:      v.$color-danger;
+    &:hover { background: rgba(v.$color-danger, 0.2); }
+  }
+
+  &--save {
+    background: rgba(v.$color-success, 0.1);
+    color:      v.$color-success;
+    &:hover { background: rgba(v.$color-success, 0.2); }
+  }
+
+  &--cancel {
+    background: rgba(v.$color-text-muted, 0.1);
+    color:      v.$color-text-muted;
+    &:hover { background: rgba(v.$color-text-muted, 0.2); }
+  }
+}
+
+// ─── Estados vacío / error / loading ──────────────────
+.tasks-empty {
+  @include m.flex-center(column);
+  @include m.card;
+  padding:    v.$spacing-xl;
+  gap:        v.$spacing-sm;
+  color:      v.$color-text-muted;
+  text-align: center;
+
+  p:first-child { font-size: v.$font-size-lg; }
+}
+
+.tasks-error,
+.tasks-loading {
+  text-align:    center;
+  padding:       v.$spacing-md;
+  border-radius: v.$border-radius-sm;
+  font-size:     v.$font-size-sm;
+}
+
+.tasks-error   { color: v.$color-danger;      background: rgba(v.$color-danger, 0.08); }
+.tasks-loading { color: v.$color-text-muted; }
