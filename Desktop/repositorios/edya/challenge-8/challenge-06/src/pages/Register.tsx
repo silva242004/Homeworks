@@ -26,7 +26,7 @@ const Register = () => {
     }
 
     const result = await register(email, password)
-    if (result) navigate("/tasks")
+    if (result) navigate("/dashboard")
   }
 
   return (

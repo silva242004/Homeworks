@@ -1,26 +1,28 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { useAuthContext } from "./context/AuthContext"
 import PrivateRoute from "./components/PrivateRoute"
-import Login    from "./pages/Login"
-import Register from "./pages/Register"
-import Tasks    from "./pages/Tasks"
+import Layout      from "./components/Layout"
+import Login       from "./pages/Login"
+import Register    from "./pages/Register"
+import menuTree, { flattenTree } from "./data/menuTree"
 
-// ─── Ruta pública ─────────────────────────────────────
-// Si el usuario YA está logueado y trata de ir a /login
-// lo manda directo a /tasks
+// ─── Public-only guard (redirect if already logged in) ─
 const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthContext()
-  if (user) return <Navigate to="/tasks" replace />
+  if (user) return <Navigate to="/dashboard" replace />
   return <>{children}</>
 }
 
 // ─── App ──────────────────────────────────────────────
 const App = () => {
+  // Flatten N-ary tree → flat list of route nodes (DFS pre-order)
+  const allRoutes = flattenTree(menuTree)
+
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* Rutas públicas — solo si NO está logueado */}
+        {/* ── Public routes (outside sidebar layout) ─── */}
         <Route
           path="/"
           element={
@@ -38,17 +40,25 @@ const App = () => {
           }
         />
 
-        {/* Ruta privada — solo si ESTÁ logueado */}
+        {/* ── Protected routes (inside sidebar Layout) ─ */}
         <Route
-          path="/tasks"
           element={
             <PrivateRoute>
-              <Tasks />
+              <Layout />
             </PrivateRoute>
           }
-        />
+        >
+          {/* Dynamically generate a <Route> per tree node */}
+          {allRoutes.map(node => (
+            <Route
+              key={node.path}
+              path={node.path}
+              element={<node.component />}
+            />
+          ))}
+        </Route>
 
-        {/* Cualquier ruta desconocida → login */}
+        {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>

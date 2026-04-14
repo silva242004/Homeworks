@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const result = await login(email, password)
-    if (result) navigate("/tasks")
+    if (result) navigate("/dashboard")
   }
 
   return (
