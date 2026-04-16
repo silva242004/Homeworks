@@ -1,0 +1,225 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: v.$font-family;
+  font-size: v.$font-size-base;
+  background-color: v.$color-bg;
+  color: v.$color-text;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.auth-container {
+  @include m.flex-center;
+  min-height: 100vh;
+  padding: v.$spacing-md;
+}
+
+.auth-card {
+  @include m.card;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: v.$shadow-md;
+}
+
+.auth-title {
+  font-size: v.$font-size-xl;
+  font-weight: 700;
+  color: v.$color-text;
+  margin-bottom: v.$spacing-xs;
+}
+
+.auth-subtitle {
+  color: v.$color-text-muted;
+  margin-bottom: v.$spacing-lg;
+  font-size: v.$font-size-sm;
+}
+
+.auth-error {
+  background: rgba(v.$color-danger, 0.1);
+  color: v.$color-danger;
+  border: 1px solid rgba(v.$color-danger, 0.3);
+  border-radius: v.$border-radius-sm;
+  padding: v.$spacing-sm v.$spacing-md;
+  font-size: v.$font-size-sm;
+  margin-bottom: v.$spacing-md;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-md;
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: v.$spacing-lg;
+  font-size: v.$font-size-sm;
+  color: v.$color-text-muted;
+
+  a {
+    color: v.$color-primary;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-xs;
+
+  label {
+    font-size: v.$font-size-sm;
+    font-weight: 500;
+    color: v.$color-text;
+  }
+
+  input {
+    @include m.input-base;
+  }
+}
+
+.btn {
+  @include m.button-base;
+
+  &-primary {
+    background: v.$color-primary;
+    color: white;
+    width: 100%;
+
+    &:hover:not(:disabled) {
+      background: v.$color-primary-dark;
+      transform: translateY(-1px);
+      box-shadow: v.$shadow-sm;
+    }
+  }
+
+  &-logout {
+    background: transparent;
+    color: v.$color-danger;
+    border: 1.5px solid v.$color-danger;
+    padding: 8px 16px;
+    font-size: v.$font-size-sm;
+    width: fit-content;
+    align-self: flex-end;
+
+    &:hover {
+      background: v.$color-danger;
+      color: white;
+    }
+  }
+}
+
+.home-container {
+  min-height: 100vh;
+  padding: v.$spacing-xl v.$spacing-md;
+}
+
+.home-hero {
+  @include m.card;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-lg;
+  box-shadow: v.$shadow-md;
+}
+
+.home-eyebrow {
+  font-size: v.$font-size-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: v.$color-primary;
+  font-weight: 700;
+}
+
+.home-title {
+  font-size: v.$font-size-xl;
+  line-height: 1.2;
+}
+
+.home-header {
+  @include m.flex-between;
+  align-items: flex-start;
+  gap: v.$spacing-md;
+}
+
+.home-subtitle {
+  color: v.$color-text-muted;
+  max-width: 52ch;
+}
+
+.home-card {
+  background: rgba(v.$color-primary, 0.08);
+  border: 1px solid rgba(v.$color-primary, 0.18);
+  border-radius: v.$border-radius-md;
+  padding: v.$spacing-lg;
+}
+
+.home-label {
+  font-size: v.$font-size-sm;
+  color: v.$color-text-muted;
+  margin-bottom: v.$spacing-xs;
+}
+
+.home-email {
+  font-size: v.$font-size-lg;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.home-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: v.$spacing-md;
+}
+
+.node-form-card {
+  @include m.card;
+  background: rgba(v.$color-primary, 0.04);
+  border: 1px solid rgba(v.$color-primary, 0.18);
+}
+
+.create-node-form {
+  margin-top: v.$spacing-sm;
+}
+
+.form-group {
+  select {
+    @include m.input-base;
+    appearance: none;
+  }
+}
+
+.create-node-button {
+  width: auto;
+  min-width: 140px;
+}
+
+.tree-section {
+  margin-top: v.$spacing-sm;
+}
+
+@media (max-width: 640px) {
+  .home-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-logout,
+  .create-node-button {
+    width: 100%;
+  }
+}
