@@ -212,6 +212,326 @@ body {
   margin-top: v.$spacing-sm;
 }
 
+// ─── Graph Section ────────────────────────────────────
+.graph-section {
+  @include m.card;
+  max-width: 900px;
+  margin: v.$spacing-xl auto 0;
+  box-shadow: v.$shadow-md;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-lg;
+}
+
+.graph-section-header {
+  margin-bottom: 0;
+}
+
+.graph-title {
+  font-size: v.$font-size-xl;
+  font-weight: 700;
+  color: v.$color-text;
+  margin-bottom: v.$spacing-xs;
+}
+
+.graph-subtitle {
+  font-size: v.$font-size-sm;
+  color: v.$color-text-muted;
+}
+
+.graph-error {
+  background: rgba(v.$color-danger, 0.1);
+  color: v.$color-danger;
+  border: 1px solid rgba(v.$color-danger, 0.3);
+  border-radius: v.$border-radius-sm;
+  padding: v.$spacing-sm v.$spacing-md;
+  font-size: v.$font-size-sm;
+  margin-bottom: v.$spacing-md;
+}
+
+.graph-forms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: v.$spacing-md;
+}
+
+.graph-form-card {
+  @include m.card;
+  background: rgba(v.$color-primary, 0.04);
+  border: 1px solid rgba(v.$color-primary, 0.18);
+}
+
+.graph-form-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: v.$color-text;
+  margin-bottom: v.$spacing-md;
+}
+
+.graph-form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-sm;
+}
+
+.graph-input {
+  @include m.input-base;
+  appearance: none;
+
+  &--people {
+    margin-top: v.$spacing-sm;
+    background: v.$color-bg-card;
+    cursor: default;
+
+    option {
+      padding: v.$spacing-xs v.$spacing-sm;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.btn-graph-primary {
+  @include m.button-base;
+  background: v.$color-primary;
+  color: white;
+  width: 100%;
+
+  &:hover:not(:disabled) {
+    background: v.$color-primary-dark;
+    transform: translateY(-1px);
+    box-shadow: v.$shadow-sm;
+  }
+}
+
+.people-list {
+  list-style: none;
+  margin-top: v.$spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-xs;
+}
+
+.people-list-empty {
+  font-size: v.$font-size-sm;
+  color: v.$color-text-muted;
+  font-style: italic;
+}
+
+.people-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: v.$spacing-xs v.$spacing-sm;
+  background: rgba(v.$color-primary, 0.08);
+  border-radius: v.$border-radius-sm;
+  font-size: v.$font-size-sm;
+}
+
+.people-name {
+  font-weight: 500;
+  color: v.$color-text;
+}
+
+.people-age {
+  color: v.$color-text-muted;
+  font-size: 0.8rem;
+}
+
+.graph-visualization {
+  border: 1px solid v.$color-border;
+  border-radius: v.$border-radius-md;
+  overflow: hidden;
+  background: #fafafa;
+}
+
+.graph-empty {
+  text-align: center;
+  padding: v.$spacing-xl;
+  color: v.$color-text-muted;
+  font-style: italic;
+}
+
+.graph-legend {
+  display: flex;
+  gap: v.$spacing-md;
+  justify-content: center;
+  margin-top: v.$spacing-md;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-xs;
+  font-size: v.$font-size-sm;
+  font-weight: 500;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+
+  &.legend-city::before {
+    background: #f6ad55;
+  }
+
+  &.legend-person::before {
+    background: #68d391;
+  }
+}
+
+// ─── Search Engine Section ────────────────────────────
+.search-section {
+  @include m.card;
+  max-width: 900px;
+  margin: v.$spacing-xl auto;
+  box-shadow: v.$shadow-md;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-lg;
+}
+
+.search-section-header {
+  margin-bottom: 0;
+}
+
+.search-title {
+  font-size: v.$font-size-xl;
+  font-weight: 700;
+  color: v.$color-text;
+  margin-bottom: v.$spacing-xs;
+}
+
+.search-subtitle {
+  font-size: v.$font-size-sm;
+  color: v.$color-text-muted;
+}
+
+.search-error {
+  background: rgba(v.$color-danger, 0.1);
+  color: v.$color-danger;
+  border: 1px solid rgba(v.$color-danger, 0.3);
+  border-radius: v.$border-radius-sm;
+  padding: v.$spacing-sm v.$spacing-md;
+  font-size: v.$font-size-sm;
+  margin-bottom: v.$spacing-md;
+}
+
+.search-forms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: v.$spacing-md;
+}
+
+.search-form-card {
+  @include m.card;
+  background: rgba(v.$color-success, 0.04);
+  border: 1px solid rgba(v.$color-success, 0.2);
+}
+
+.search-form-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: v.$color-text;
+  margin-bottom: v.$spacing-md;
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-sm;
+}
+
+.search-results-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: v.$color-success;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-sm;
+}
+
+.search-input {
+  @include m.input-base;
+  appearance: none;
+}
+
+.btn-search-primary {
+  @include m.button-base;
+  background: v.$color-success;
+  color: white;
+  width: 100%;
+
+  &:hover:not(:disabled) {
+    background: v.$color-success-dark;
+    transform: translateY(-1px);
+    box-shadow: v.$shadow-sm;
+  }
+}
+
+.search-empty {
+  font-size: v.$font-size-sm;
+  color: v.$color-text-muted;
+  font-style: italic;
+}
+
+.search-results-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-xs;
+}
+
+.search-result-item {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: v.$spacing-sm;
+  padding: v.$spacing-xs v.$spacing-sm;
+  background: rgba(v.$color-success, 0.08);
+  border-radius: v.$border-radius-sm;
+  font-size: v.$font-size-sm;
+}
+
+.result-rank {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: v.$color-text-muted;
+}
+
+.result-name {
+  font-weight: 600;
+  color: v.$color-text;
+}
+
+.result-popularity {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: v.$color-success-dark;
+  background: rgba(v.$color-success, 0.15);
+  border-radius: v.$border-radius-sm;
+  padding: 2px 8px;
+}
+
+.search-results-card {
+  grid-column: 1 / -1;
+}
+
+// ─── Responsive ───────────────────────────────────────
 @media (max-width: 640px) {
   .home-header {
     flex-direction: column;
@@ -221,5 +541,9 @@ body {
   .btn-logout,
   .create-node-button {
     width: 100%;
+  }
+
+  .graph-forms {
+    grid-template-columns: 1fr;
   }
 }
