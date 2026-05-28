@@ -1,0 +1,56 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.search-bar {
+  @include flex-center;
+  gap: $spacing-sm;
+  background: $color-surface-elevated;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: $spacing-xl;
+  transition: border-color $transition;
+
+  &:focus-within {
+    border-color: $color-primary;
+  }
+
+  .search-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .search-input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: $font-size-md;
+    color: $color-text-primary;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+  }
+
+  .search-clear {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    width: 20px;
+    height: 20px;
+    @include flex-center;
+    border-radius: $radius-full;
+    transition: background $transition, color $transition;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color-text-primary;
+    }
+  }
+}
+
+.results-count {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  margin-bottom: $spacing-md;
+}

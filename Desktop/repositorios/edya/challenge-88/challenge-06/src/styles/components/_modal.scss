@@ -1,0 +1,278 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: $spacing-md;
+}
+
+.modal {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+}
+
+.modal-header {
+  @include flex-between;
+  padding: $spacing-lg;
+  border-bottom: 1px solid $color-border;
+  flex-shrink: 0;
+
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    @include flex-center;
+    border-radius: $radius-full;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    transition: background $transition, color $transition;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-primary;
+    }
+  }
+}
+
+.modal-form {
+  overflow-y: auto;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  scrollbar-width: thin;
+  scrollbar-color: $color-surface-elevated transparent;
+}
+
+// Form fields
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.form-label {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-input {
+  background: $color-surface-elevated;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  padding: $spacing-sm $spacing-md;
+  color: $color-text-primary;
+  font-size: $font-size-md;
+  width: 100%;
+  transition: border-color $transition;
+  outline: none;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+  }
+
+  &.error {
+    border-color: $color-danger;
+  }
+}
+
+.form-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b3b3b3' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-md center;
+  padding-right: 36px;
+
+  option {
+    background: $color-surface-elevated;
+    color: $color-text-primary;
+  }
+}
+
+.form-error {
+  font-size: $font-size-sm;
+  color: $color-danger;
+}
+
+// Popularity range
+.pop-badge {
+  font-size: $font-size-lg;
+  font-weight: 700;
+  color: $color-primary;
+  font-variant-numeric: tabular-nums;
+}
+
+.form-range {
+  width: 100%;
+  appearance: none;
+  height: 4px;
+  border-radius: $radius-full;
+  background: $color-surface-elevated;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: $color-primary;
+    cursor: pointer;
+    transition: transform $transition;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 50%;
+    background: $color-primary;
+    cursor: pointer;
+  }
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+// Related songs multiselect
+.related-count {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.related-list {
+  background: $color-surface-elevated;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $color-surface transparent;
+}
+
+.related-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  cursor: pointer;
+  transition: background $transition;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: $color-primary;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .related-title {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    flex: 1;
+    @include text-truncate;
+  }
+
+  .related-artist {
+    font-size: 0.72rem;
+    color: $color-text-muted;
+    @include text-truncate;
+    max-width: 100px;
+  }
+}
+
+// Modal action buttons
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: 1px solid $color-border;
+}
+
+.btn-primary {
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-full;
+  background: $color-primary;
+  color: #fff;
+  font-weight: 600;
+  font-size: $font-size-base;
+  transition: background $transition, transform $transition;
+
+  &:hover {
+    background: $color-primary-hover;
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.btn-secondary {
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-full;
+  background: transparent;
+  color: $color-text-secondary;
+  font-weight: 500;
+  font-size: $font-size-base;
+  border: 1px solid $color-border;
+  transition: background $transition, color $transition;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-text-primary;
+  }
+}

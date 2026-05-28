@@ -1,0 +1,67 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.rec-selector {
+  margin-bottom: $spacing-xl;
+
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: $spacing-sm;
+}
+
+.selector-btn {
+  @include surface;
+  padding: $spacing-sm $spacing-md;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  transition: background $transition, border-color $transition;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    background: $color-surface-elevated;
+  }
+
+  &.active {
+    border-color: $color-primary;
+    background: $color-primary-dim;
+  }
+
+  .selector-title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    @include text-truncate;
+    max-width: 100%;
+  }
+
+  .selector-artist {
+    font-size: 0.72rem;
+    color: $color-text-muted;
+    @include text-truncate;
+    max-width: 100%;
+  }
+}
+
+.rec-results {
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+
+    .rec-count {
+      font-size: $font-size-base;
+      color: $color-text-muted;
+      font-weight: 400;
+    }
+  }
+}

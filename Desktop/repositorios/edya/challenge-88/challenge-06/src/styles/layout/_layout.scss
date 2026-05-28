@@ -1,0 +1,81 @@
+@use "../abstracts/variables" as *;
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-xl;
+  background: $color-bg;
+
+  scrollbar-width: thin;
+  scrollbar-color: $color-surface-elevated transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-surface-elevated;
+    border-radius: $radius-full;
+  }
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: $spacing-xl;
+
+  h1 {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    margin-bottom: $spacing-sm;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: $color-text-secondary;
+    font-size: $font-size-base;
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: $spacing-md;
+}
+
+.empty-hint {
+  color: $color-text-muted;
+  font-size: $font-size-base;
+  padding: $spacing-lg 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: 600;
+  }
+}
+
+.see-all {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-primary;
+  }
+}

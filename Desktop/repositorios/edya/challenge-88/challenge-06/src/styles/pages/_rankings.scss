@@ -1,0 +1,77 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.ranking-item {
+  @include surface(true);
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  transition: background $transition;
+
+  &:hover {
+    background: #303030;
+  }
+
+  &.top-three {
+    border-left: 3px solid $color-primary;
+  }
+}
+
+.ranking-position {
+  font-size: 1.4rem;
+  min-width: 36px;
+  text-align: center;
+
+  .pos-number {
+    font-size: $font-size-md;
+    color: $color-text-muted;
+    font-weight: 600;
+  }
+}
+
+.ranking-info {
+  flex: 1;
+
+  .ranking-title {
+    font-size: $font-size-md;
+    font-weight: 600;
+  }
+
+  .ranking-artist {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}
+
+.ranking-right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.pop-indicator {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  width: 120px;
+
+  .pop-fill {
+    height: 4px;
+    background: $color-primary;
+    border-radius: $radius-full;
+    flex: 1;
+  }
+
+  .pop-label {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    min-width: 24px;
+  }
+}

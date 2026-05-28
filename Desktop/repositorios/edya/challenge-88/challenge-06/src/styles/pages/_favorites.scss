@@ -1,0 +1,32 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.favorites-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-lg;
+
+  p {
+    color: $color-text-muted;
+  }
+}
+
+.not-found-page {
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-lg;
+  height: 60vh;
+
+  .not-found-code {
+    font-size: 6rem;
+    font-weight: 700;
+    color: $color-primary;
+    line-height: 1;
+  }
+
+  .not-found-msg {
+    color: $color-text-secondary;
+    font-size: $font-size-lg;
+  }
+}

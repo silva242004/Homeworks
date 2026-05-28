@@ -1,0 +1,188 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.search-filters {
+  margin-bottom: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  align-items: flex-end;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  min-width: 140px;
+
+  &--wide {
+    min-width: 200px;
+    flex: 1;
+  }
+}
+
+.filter-label {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-pop-value {
+  font-size: $font-size-sm;
+  font-weight: 700;
+  color: $color-primary;
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.filter-select {
+  background: $color-surface-elevated;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  padding: $spacing-xs $spacing-sm;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236a6a6a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-sm center;
+  padding-right: 28px;
+  transition: border-color $transition;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+
+  option {
+    background: $color-surface-elevated;
+    color: $color-text-primary;
+  }
+}
+
+.filter-number {
+  // Override the chevron from filter-select since this is a number input
+  appearance: auto;
+  background-image: none;
+  padding-right: $spacing-sm;
+  width: 100%;
+
+  &--error {
+    border-color: $color-danger;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+}
+
+.filter-hint {
+  font-size: 0.72rem;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.filter-range {
+  width: 100%;
+  appearance: none;
+  height: 3px;
+  border-radius: $radius-full;
+  background: $color-surface-elevated;
+  outline: none;
+  cursor: pointer;
+  margin: $spacing-xs 0;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $color-primary;
+    cursor: pointer;
+    transition: transform $transition;
+
+    &:hover {
+      transform: scale(1.25);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 50%;
+    background: $color-primary;
+    cursor: pointer;
+  }
+}
+
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border;
+  background: $color-surface-elevated;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background $transition, border-color $transition, color $transition;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-text-primary;
+  }
+
+  &.active {
+    background: $color-primary-dim;
+    border-color: $color-primary-border;
+    color: $color-primary;
+  }
+}
+
+.filters-reset {
+  align-self: flex-start;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  padding: 2px $spacing-sm;
+  border-radius: $radius-full;
+  border: 1px solid $color-border;
+  background: transparent;
+  cursor: pointer;
+  transition: background $transition, color $transition;
+
+  &:hover {
+    background: rgba(224, 82, 82, 0.1);
+    color: $color-danger;
+    border-color: rgba(224, 82, 82, 0.3);
+  }
+}
+
+// Results feedback
+.search-feedback {
+  padding: $spacing-lg 0;
+  color: $color-text-muted;
+  font-size: $font-size-base;
+
+  strong {
+    color: $color-text-secondary;
+  }
+}

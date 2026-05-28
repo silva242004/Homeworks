@@ -1,54 +1,31 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import PrivateRoute from "./components/PrivateRoute"
-import { TreeProvider } from "./context/TreeContext"
-import { useAuthContext } from "./hooks/useAuthContext"
+import { BrowserRouter } from "react-router-dom"
+import { SongsProvider } from "./context/SongsProvider"
+import { Sidebar } from "./components/Sidebar"
+import { AddSongModal } from "./components/AddSongModal"
+import { AppRouter } from "./router/AppRouter"
+import { useSongsContext } from "./context/SongsContext"
+import "./styles/main.scss"
 
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
+function AppShell() {
+  const { isAddSongOpen } = useSongsContext()
 
-const PublicRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuthContext()
-
-  if (user) return <Navigate to="/home" replace />
-
-  return <>{children}</>
-}
-
-const App = () => {
   return (
-    <BrowserRouter>
-      <TreeProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/home"
-            element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </TreeProvider>
-    </BrowserRouter>
+    <div className="app-layout">
+      <Sidebar />
+      <main className="app-content">
+        <AppRouter />
+      </main>
+      {isAddSongOpen && <AddSongModal />}
+    </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <SongsProvider>
+        <AppShell />
+      </SongsProvider>
+    </BrowserRouter>
+  )
+}

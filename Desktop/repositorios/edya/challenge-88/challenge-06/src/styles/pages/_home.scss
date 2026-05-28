@@ -1,0 +1,49 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+  margin-bottom: $spacing-xl;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  @include surface(true);
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+
+  .stat-number {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  .stat-label {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}
+
+.home-top {
+  margin-bottom: $spacing-xl;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+
+  .action-btn {
+    .action-icon {
+      font-size: 1.1rem;
+    }
+  }
+}

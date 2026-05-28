@@ -1,52 +1,62 @@
-import CreateNodeForm from "../components/CreateNodeForm";
-import TreeView from "../components/TreeView";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useTree } from "../hooks/useTree";
+import { Link } from "react-router-dom"
+import { useSongsContext } from "../context/SongsContext"
+import { SongCard } from "../components/SongCard"
 
-const Home = () => {
-  const { user, logout } = useAuthContext();
-  const { tree } = useTree();
-
-  const handleLogout = async () => {
-    await logout();
-  };
+export default function Home() {
+  const { topSongs, songs } = useSongsContext()
 
   return (
-    <main className="home-container">
-      <section className="home-hero">
-        <div className="home-header">
-          <div>
-            <p className="home-eyebrow">Home</p>
-            <h1 className="home-title">Gestor de Archivos</h1>
-          </div>
-
+    <div className="page home-page">
+      <header className="page-header">
+        <h1>Bienvenido a ECUALIZER</h1>
+        <p>Explora, descubre y disfruta de tu música favorita</p>
+      
+        <section className="home-actions">
+        <Link to="/search" className="action-btn">
           
-        </div>
+          <span>Buscar</span>
+        </Link>
+        <Link to="/recommendations" className="action-btn">
+          
+          <span>Recomendaciones</span>
+        </Link>
+        <Link to="/favorites" className="action-btn">
+          
+          <span>Favoritos</span>
+        </Link>
+        <Link to="/rankings" className="action-btn">
+          
+          <span>Rankings</span>
+        </Link>
+      
+      </section>
+      </header>
 
-        <div className="home-card">
-          <p className="home-label">Usuario</p>
-          <p className="home-email">{user?.email}</p>
-          <div className="home-card-actions">
-            <button className="btn btn-logout" onClick={handleLogout}>
-              Cerrar sesion
-            </button>
-          </div>
+      <section className="home-stats">
+        <div className="stat-card">
+          <span className="stat-number">{songs.length}</span>
+          <span className="stat-label">Canciones</span>
         </div>
-
-        <div className="node-form-card">
-          <CreateNodeForm />
+        <div className="stat-card">
+          <span className="stat-number">{topSongs[0]?.popularity ?? 0}</span>
+          <span className="stat-label">Popularidad máxima</span>
         </div>
+        
+      </section>
 
-        <div className="tree-section">
-          {!tree?.root ? (
-            <p>Cargando arbol...</p>
-          ) : (
-            <TreeView node={tree.root} />
-          )}
+      <section className="home-top">
+        <div className="section-header">
+          <h2>Top 5 canciones</h2>
+         
+        </div>
+        <div className="cards-grid">
+          {topSongs.slice(0, 5).map((song, index) => (
+            <SongCard key={song.id} song={song} rank={index + 1} />
+          ))}
         </div>
       </section>
-    </main>
-  );
-};
 
-export default Home;
+      
+    </div>
+  )
+}
