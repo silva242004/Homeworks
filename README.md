@@ -1,8 +1,24 @@
-# Homeworks
-tareas para estructura de datos y algoritmos
-Alex Silva
-2235771
-<h1>Homework 1</h1>
-<img width="994" height="559" alt="imagen" src="https://github.com/user-attachments/assets/b0403a4e-c8d0-435c-8806-9c07a43ca599" />
-<h1>challenge 1 </h1>
-<img width="1002" height="564" alt="imagen" src="https://github.com/user-attachments/assets/18a7110f-41fa-4362-b581-f53b10abb4f4" />
+Parcial 3
+La empresa Spotify quiere desarrollar una mini plataforma de música
+educativa donde:
+● Los usuarios buscan canciones rápidamente.
+● El sistema recomienda canciones relacionadas.
+● Se organizan rankings de popularidad.
+● Existe un panel visual estilizado usando Sass.
+Debes construir partes esenciales del sistema utilizando estructuras de
+datos avanzadas.
+El sistema debe incluir:
+Buscador predictivo de canciones
+Implementa una estructura Trie para almacenar títulos de canciones.
+Debe permitir:
+1. Insertar canciones.
+2. Buscar si una canción existe.
+3. Mostrar sugerencias por prefijo.
+Ranking de canciones populares
+La plataforma necesita mostrar el TOP canciones más escuchadas.
+1. Implementa un Max Heap.
+Recomendación de canciones relacionadas
+Cada canción se conecta con canciones similares.
+1. Se debe representar el sistema mediante un grafo no dirigido.
+Panel visual de rankings
+La empresa necesita estilos visuales reutilizables para el dashboard.
